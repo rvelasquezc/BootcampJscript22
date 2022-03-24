@@ -90,8 +90,8 @@ function onSubmit(event){
         <td>${total}</td>
         <td>
             <div class="btn-group">
-                <a href="#" onclick="onEdit(event)" class="btn btn-sm btn-outline-secondary">Editar</a> 
-                <a href="#" onclick="onDelete(event)" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                <a title ="Editar" href="#" onclick="onEdit(event)" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil-square"></i></a> 
+                <a title ="Eliminar" href="#" onclick="onDelete(event)" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></a>
             </div>
         </td>
     `;
@@ -114,7 +114,7 @@ function onSubmit(event){
 function onEdit(event){
     event.preventDefault();
     /** @type {HTMLAnchorElement} */
-    const anchor = event.target; /* referencia a fila a editar*/
+    const anchor = event.currentTarget; /* referencia a fila a editar*/
     const tr = anchor.parentElement.parentElement.parentElement;
    const celdas = tr.getElementsByTagName("td");
    const [tdCodigo, tdNombre,tdCantidad,tdPrecio,tdCategoria,tdTotal,tdAccion] = celdas;
@@ -137,7 +137,7 @@ function onEdit(event){
 function onDelete(event){
     event.preventDefault();
     /** @type {HTMLAnchorElement} */
-    const anchor = event.target; /* referencia a fila a eliminar*/
+    const anchor = event.currentTarget; /* referencia a fila a eliminar*/
     const tr = anchor.parentElement.parentElement.parentElement;
     tbody.removeChild(tr);
     console.log(anchor);
