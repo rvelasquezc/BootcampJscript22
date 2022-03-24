@@ -88,8 +88,12 @@ function onSubmit(event){
         <td>${precio}</td>
         <td>${categoria}</td>
         <td>${total}</td>
-        <td><a href="#" onclick="onEdit(event)">Editar</a> 
-        | <a href="#" onclick="onDelete(event)">Eliminar</a></td>
+        <td>
+            <div class="btn-group">
+                <a href="#" onclick="onEdit(event)" class="btn btn-sm btn-outline-secondary">Editar</a> 
+                <a href="#" onclick="onDelete(event)" class="btn btn-sm btn-outline-danger">Eliminar</a>
+            </div>
+        </td>
     `;
 
 
@@ -111,7 +115,7 @@ function onEdit(event){
     event.preventDefault();
     /** @type {HTMLAnchorElement} */
     const anchor = event.target; /* referencia a fila a editar*/
-    const tr = anchor.parentElement.parentElement;
+    const tr = anchor.parentElement.parentElement.parentElement;
    const celdas = tr.getElementsByTagName("td");
    const [tdCodigo, tdNombre,tdCantidad,tdPrecio,tdCategoria,tdTotal,tdAccion] = celdas;
 
@@ -134,7 +138,7 @@ function onDelete(event){
     event.preventDefault();
     /** @type {HTMLAnchorElement} */
     const anchor = event.target; /* referencia a fila a eliminar*/
-    const tr = anchor.parentElement.parentElement;
+    const tr = anchor.parentElement.parentElement.parentElement;
     tbody.removeChild(tr);
     console.log(anchor);
 }
