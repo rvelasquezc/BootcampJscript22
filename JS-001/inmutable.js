@@ -12,7 +12,7 @@ juan2.apellido = "lopez";
 console.log("juan",juan);
 console.log("juan2",juan2);*/
 
-//------------ formas de crear copia sin modificar el ob original --------
+//------------ formas de crear copia sin modificar el obj original --------
 const juan ={
     nombre: "juan",
     apellido: "Rodriguez",
