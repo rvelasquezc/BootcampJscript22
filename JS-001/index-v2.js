@@ -70,13 +70,19 @@ const reducer = (state, action) => {
         }
     }
 
+    if (action.type == "producto-seleccionado")
+    {
+        const codigo = action.payload.codigo;
+        return {
+            ...state,
+            producto: state.productos.find(x => x.codigo == codigo) || {}
+        }
+    }
+
     return state;
 };
 const store = Redux.createStore(reducer, preloadedState);
- //dispatch: enviar un action
- //getState: obtener estado actual
- //subscribe: suscribirnos a evento/ cambio de estado
-
+ //dispatch: enviar un action //getState: obtener estado actual //subscribe: suscribirnos a evento/ cambio de estado
  let latestState;
 
 const unsuscribe =  store.subscribe(() =>{
@@ -86,9 +92,19 @@ const unsuscribe =  store.subscribe(() =>{
     {
         latestState = currentState;
         console.log("estado: ", store.getState());
+        renderForm(currentState.producto);
         renderTable(currentState.productos);
     }
 })
+
+function renderForm(producto)
+{
+    inputCodigo.value = producto.codigo || "";
+    inputNombre.value = producto.nombre || "";
+    inputCantidad.value = producto.cantidad || "";
+    inputPrecio.value = producto.precio || "";
+    inputCategoria.value = producto.categoria || 1;
+}
 
 function renderTable(productos)
 {
@@ -156,6 +172,7 @@ function renderTable(productos)
    
 }
 
+form.addEventListener("submit", onSubmit);
 /**
  * 
  * @param {Event} event 
@@ -200,9 +217,14 @@ function renderTable(productos)
          });
      }
 
-     form.reset();
+     store.dispatch({
+        type: "producto-seleccionado",
+        payload: {
+            codigo: null
+        }
+    });
+}
 
- }
 
 store.dispatch({ 
     type: "producto-agregado",
@@ -248,7 +270,7 @@ store.dispatch({
 store.dispatch({
     type: "producto-eliminado",
     payload: {
-        codigo: 3
+        //codigo: 3
     }
 });
 
